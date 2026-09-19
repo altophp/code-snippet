@@ -1,11 +1,7 @@
 # Installation
 
-Code Snippet is currently distributed from its development branch. Add the
-repository explicitly, then require `dev-main`:
-
 ```bash
-composer config repositories.alto-code-snippet vcs https://github.com/altophp/code-snippet
-composer require alto/code-snippet:dev-main
+composer require alto/code-snippet
 ```
 
 Code Snippet requires PHP 8.4 or later and installs `alto/language`.
