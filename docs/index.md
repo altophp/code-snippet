@@ -1,11 +1,23 @@
-# CodeSnippet
+# Code Snippet
 
-CodeSnippet represents code as immutable lines with source provenance, selected lines, and
-presentation-neutral annotations.
+Code Snippet stores code, original line numbers, selections, and annotations as
+immutable values. Use it to pass an excerpt between extraction, analysis, and
+presentation without tying the data to a renderer.
 
-- [Installation](installation.md)
-- [Getting started](getting-started.md)
-- [Public API](public-api.md)
+```php
+use Alto\Code\Snippet\CodeSnippet;
 
-The package owns the portable snippet model. It does not read files, locate declarations, tokenize
-code, or render output.
+$snippet = CodeSnippet::fromCode("first\nsecond\nthird", 'php', startLine: 24)
+    ->selectLines(3);
+
+echo $snippet->lines()[2]->number; // 26
+```
+
+## Documentation
+
+- [Installation](installation.md): install the package and verify it can create a snippet.
+- [Getting started](getting-started.md): create a snippet and inspect a selected line.
+- [Model](model.md): work with snippets, lines, annotations, segments, and transformations.
+
+The package owns the portable snippet model. It does not read files, detect
+languages, locate declarations, tokenize code, or render output.

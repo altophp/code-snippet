@@ -1,4 +1,4 @@
-# ALTO CodeSnippet
+# ALTO Code Snippet
 
 Represent immutable code snippets with source lines, selections, and presentation-neutral
 annotations.
@@ -9,7 +9,7 @@ annotations.
 &nbsp; ![License](https://img.shields.io/github/license/altophp/code-snippet?label=License&labelColor=050608&color=00B7FF)
 &nbsp; [![GitHub Sponsors](https://img.shields.io/github/sponsors/smnandre?logo=githubsponsors&logoColor=00B7FF&label=%20Sponsor&labelColor=050608&color=00B7FF)](https://github.com/sponsors/smnandre)
 
-CodeSnippet turns source code into a portable model with original line numbers, selected lines,
+Code Snippet turns source code into a portable model with original line numbers, selected lines,
 and generic byte-range annotations. Renderers can consume that model without coupling this package
 to HTML, SVG, terminals, slides, or a syntax highlighter.
 
@@ -24,20 +24,21 @@ echo $snippet->lines()[2]->number; // 26
 
 ## Installation
 
-Install ALTO CodeSnippet with Composer:
+Code Snippet is currently distributed from its development branch. Add the
+repository explicitly, then require `dev-main`:
 
 ```bash
-composer require alto/code-snippet
+composer config repositories.alto-code-snippet vcs https://github.com/altophp/code-snippet
+composer require alto/code-snippet:dev-main
 ```
 
-CodeSnippet requires PHP 8.4 or later and `alto/language`.
+Code Snippet requires PHP 8.4 or later and installs `alto/language`.
 
-## Quick Start
+## Quick start
 
-Create a snippet, select a line, and attach an application-defined annotation:
+Create a snippet, keep its original source position, and select one line:
 
 ```php
-use Alto\Code\Snippet\CodeAnnotation;
 use Alto\Code\Snippet\CodeSnippet;
 
 $snippet = CodeSnippet::fromCode(
@@ -45,16 +46,16 @@ $snippet = CodeSnippet::fromCode(
     'php',
     sourceName: 'src/Runner.php',
     startLine: 24,
-)
-    ->selectLines(3)
-    ->annotate(new CodeAnnotation(
-        offset: 0,
-        length: 6,
-        type: 'syntax',
-        data: ['scope' => 'keyword'],
-    ));
+)->selectLines(3);
 
-echo json_encode($snippet, JSON_THROW_ON_ERROR);
+$line = $snippet->lines()[2];
+printf("line=%d selected=%s %s\n", $line->number, $line->selected ? 'true' : 'false', $line->code);
+```
+
+The result is:
+
+```text
+line=26 selected=true     execute();
 ```
 
 Every transformation returns a new value. The original snippet remains unchanged.
@@ -126,10 +127,15 @@ $json = json_encode($snippet, JSON_THROW_ON_ERROR);
 
 ## Package boundary
 
-CodeSnippet does not read files, detect languages, locate declarations, tokenize code, or render
+Code Snippet does not read files, detect languages, locate declarations, tokenize code, or render
 output. It only owns the immutable, presentation-neutral data model passed between those steps.
 
-See the [documentation](docs/index.md) for installation, a guided example, and the public API.
+## Documentation
+
+- [Installation](docs/installation.md): install the development package and verify it.
+- [Getting started](docs/getting-started.md): create a snippet and inspect a selected line.
+- [Model](docs/model.md): work with snippets, lines, annotations, segments, and transformations.
+- [Documentation index](docs/index.md): read the package overview and boundaries.
 
 ## Contributing
 

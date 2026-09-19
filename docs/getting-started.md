@@ -1,10 +1,15 @@
 # Getting started
 
-Create a snippet with its original source position, select lines, then attach generic byte-range
-annotations:
+After [installation](installation.md), save this as `snippet.php` beside
+`vendor/`. It creates a snippet that starts on line 24 of its original file,
+then selects its third line. The package does not read that file; the source
+name is metadata.
 
 ```php
-use Alto\Code\Snippet\CodeAnnotation;
+<?php
+
+require __DIR__.'/vendor/autoload.php';
+
 use Alto\Code\Snippet\CodeSnippet;
 
 $snippet = CodeSnippet::fromCode(
@@ -12,27 +17,25 @@ $snippet = CodeSnippet::fromCode(
     'php',
     sourceName: 'src/Runner.php',
     startLine: 24,
-)
-    ->selectLines(3)
-    ->annotate(new CodeAnnotation(
-        offset: 0,
-        length: 6,
-        type: 'syntax',
-        data: ['scope' => 'keyword'],
-    ));
-```
+)->selectLines(3);
 
-`selectLines()` uses one-based positions inside the snippet. Every `CodeLine` also carries its
-original source line number.
-
-```php
 $line = $snippet->lines()[2];
-
-$line->index;    // 3
-$line->number;   // 26
-$line->selected; // true
+printf(
+    "index=%d number=%d selected=%s\n",
+    $line->index,
+    $line->number,
+    $line->selected ? 'true' : 'false',
+);
+echo $line->code, "\n";
 ```
 
-Annotations on the complete snippet use byte offsets relative to `code()`. Line annotations are
-clipped and shifted to line-relative offsets. `segments()` then exposes contiguous text regions
-with stable annotation sets.
+Run `php snippet.php`. The output is:
+
+```text
+index=3 number=26 selected=true
+    execute();
+```
+
+`selectLines()` uses one-based positions inside the snippet. Selection marks a
+line; it does not remove the other lines or define a visual effect. Continue
+with the [model](model.md) to annotate, slice, indent, and export snippets.
