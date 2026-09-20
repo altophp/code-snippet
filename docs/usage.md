@@ -77,6 +77,29 @@ $annotated = $snippet->annotate(
 
 Snippet offsets are relative to `code()`. `CodeLine::annotations()` clips an
 annotation to the line and shifts its offset to the beginning of that line.
+Use `highlight()` when callers know the text rather than its byte offset:
+
+```php
+$snippet = CodeSnippet::fromCode('sum + sum')->highlight('sum');
+```
+
+Both occurrences receive a `focus` annotation. Pass `occurrence: 2` to target
+only the second match. For another annotation type or additional data, use
+`annotateText()`:
+
+```php
+$snippet = $snippet->annotateText(
+    'sum',
+    'warning',
+    ['label' => 'Check this value'],
+    occurrence: 1,
+);
+```
+
+Matches are literal, case-sensitive, non-overlapping byte ranges. Missing text
+leaves the snippet unchanged; empty text, an empty type, or a non-positive
+occurrence raises `InvalidArgumentException`.
+
 Annotations may overlap or cross line breaks.
 
 ```text

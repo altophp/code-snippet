@@ -94,6 +94,10 @@ $annotated = $snippet->annotate(
 Annotations may overlap or cross line breaks. Each `CodeLine` clips and shifts them to its own
 content. `segments()` derives contiguous text regions with stable annotation sets.
 
+When the caller knows the text instead of its byte offsets, `highlight('sum')` adds `focus`
+annotations to every literal match. `annotateText()` accepts another type, optional data, and a
+one-based occurrence number.
+
 ## Slicing and indentation
 
 `slice()` projects an already annotated snippet onto a half-open byte range:
