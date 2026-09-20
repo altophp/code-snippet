@@ -130,7 +130,7 @@ output. It only owns the immutable, presentation-neutral data model passed betwe
 
 - [Installation](docs/installation.md): install the development package and verify it.
 - [Getting started](docs/getting-started.md): create a snippet and inspect a selected line.
-- [Model](docs/model.md): work with snippets, lines, annotations, segments, and transformations.
+- [Usage](docs/usage.md): work with snippets, lines, annotations, segments, and transformations.
 - [Documentation index](docs/index.md): read the package overview and boundaries.
 
 ## Contributing
