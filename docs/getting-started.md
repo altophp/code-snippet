@@ -38,4 +38,4 @@ index=3 number=26 selected=true
 
 `selectLines()` uses one-based positions inside the snippet. Selection marks a
 line; it does not remove the other lines or define a visual effect. Continue
-with the [model](model.md) to annotate, slice, indent, and export snippets.
+with the [usage guide](usage.md) to annotate, slice, indent, and export snippets.

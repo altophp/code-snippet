@@ -17,7 +17,7 @@ echo $snippet->lines()[2]->number; // 26
 
 - [Installation](installation.md): install the package and verify it can create a snippet.
 - [Getting started](getting-started.md): create a snippet and inspect a selected line.
-- [Model](model.md): work with snippets, lines, annotations, segments, and transformations.
+- [Usage](usage.md): work with snippets, lines, annotations, segments, and transformations.
 
 The package owns the portable snippet model. It does not read files, detect
 languages, locate declarations, tokenize code, or render output.

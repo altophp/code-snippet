@@ -1,4 +1,4 @@
-# Model
+# Usage
 
 Code Snippet represents source text and presentation hints with four immutable
 values. Transformations return a new value, so the original snippet remains
