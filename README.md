@@ -139,7 +139,9 @@ Contributions of all kinds are welcome. Visit the
 [project on GitHub](https://github.com/altophp/code-snippet) to
 [report a bug](https://github.com/altophp/code-snippet/issues/new),
 [suggest a feature](https://github.com/altophp/code-snippet/issues/new), or
-[open a pull request](https://github.com/altophp/code-snippet/pulls). Before submitting code, run:
+[open a pull request](https://github.com/altophp/code-snippet/pulls).
+
+Before submitting code, run:
 
 ```bash
 # Runs PHP CS Fixer, PHPStan, and PHPUnit
@@ -150,13 +152,15 @@ Changes to public behavior should include tests and documentation.
 
 ## Support
 
-ALTO CodeSnippet is open source. You can support its continued development through
+ALTO Code Snippet is open source and independently maintained by
+[Simon André](https://smnandre.dev). If it is useful to your work, you can
+support its continued development through
 [GitHub Sponsors](https://github.com/sponsors/smnandre).
 
-Sharing this package with others or
-[starring it on GitHub](https://github.com/altophp/code-snippet) is also much appreciated.
+Sharing the package or
+[starring it on GitHub](https://github.com/altophp/code-snippet) also helps.
 
 ## License
 
-ALTO CodeSnippet is released by [ALTO PHP](https://altophp.com) under the
+ALTO Code Snippet is released by [ALTO PHP](https://altophp.com) under the
 [MIT License](LICENSE).
