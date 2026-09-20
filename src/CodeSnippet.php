@@ -142,6 +142,58 @@ final readonly class CodeSnippet implements \JsonSerializable
         return in_array($line, $this->selectedLines, true);
     }
 
+    /**
+     * Highlight literal text with focus annotations, optionally at one occurrence.
+     */
+    public function highlight(string $text, ?int $occurrence = null): self
+    {
+        return $this->annotateText($text, 'focus', occurrence: $occurrence);
+    }
+
+    /**
+     * Annotate case-sensitive, non-overlapping literal matches.
+     *
+     * A null occurrence selects all matches; otherwise occurrences are one-based.
+     * Missing text or occurrences leave the snippet unchanged.
+     *
+     * @param array<string, mixed> $data
+     */
+    public function annotateText(string $text, string $type, array $data = [], ?int $occurrence = null): self
+    {
+        if ('' === $text) {
+            throw new \InvalidArgumentException('The annotation text cannot be empty.');
+        }
+
+        if (null !== $occurrence && $occurrence < 1) {
+            throw new \InvalidArgumentException('The text occurrence must be positive.');
+        }
+
+        if ('' === trim($type)) {
+            throw new \InvalidArgumentException('The annotation type cannot be empty.');
+        }
+
+        $length = strlen($text);
+        $offset = 0;
+        $match = 0;
+        $annotations = [];
+
+        while (false !== ($offset = strpos($this->code, $text, $offset))) {
+            ++$match;
+
+            if (null === $occurrence || $occurrence === $match) {
+                $annotations[] = new CodeAnnotation($offset, $length, $type, $data);
+
+                if (null !== $occurrence) {
+                    break;
+                }
+            }
+
+            $offset += $length;
+        }
+
+        return [] === $annotations ? $this : $this->annotate(...$annotations);
+    }
+
     public function annotate(CodeAnnotation ...$annotations): self
     {
         $all = $this->annotations;
